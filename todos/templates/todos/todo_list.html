@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ page_title }}</title>
+
+    <link rel="stylesheet" href="{% static 'todos/common.css' %}">
+    <link rel="stylesheet" href="{% static 'todos/main.css' %}">
+</head>
+
+<body>
+    <main class="todo-page">
+
+        <h1 class="main-title">{{ page_title }}</h1>
+
+        <div class="user-area">
+            <img
+                class="user-icon"
+                src="{% static 'todos/images/user-icon.svg' %}"
+                alt=""
+            >
+
+            <span class="username">
+                {{ request.user.username }}님
+            </span>
+
+            <span class="user-divider">/</span>
+
+            <form
+                class="logout-form"
+                method="post"
+                action="{% url 'logout' %}"
+            >
+                {% csrf_token %}
+                <button class="logout-button" type="submit">
+                    로그아웃
+                </button>
+            </form>
+        </div>
+
+
+        <!-- 미완료 Todo -->
+        <section class="todo-panel todo-panel-left">
+
+            <div class="panel-header">
+                <h2 class="panel-title">to do</h2>
+
+                <a
+                    class="add-button"
+                    href="{% url 'todo_create' %}"
+                    aria-label="Todo 추가"
+                >
+                    +
+                </a>
+            </div>
+
+            <div class="panel-line"></div>
+
+            <ul class="todo-list">
+                {% for todo in todos %}
+                    {% if not todo.completed %}
+                        {% include "todos/_todo_item.html" with todo=todo section_type="active" %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+        </section>
+
+
+        <!-- 완료된 Todo -->
+        <section class="todo-panel todo-panel-center">
+
+            <div class="panel-header">
+                <h2 class="panel-title">end to do</h2>
+            </div>
+
+            <div class="panel-line"></div>
+
+            <ul class="todo-list completed-list">
+                {% for todo in todos %}
+                    {% if todo.completed %}
+                        {% include "todos/_todo_item.html" with todo=todo section_type="completed" %}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+        </section>
+
+
+        <!-- 기한이 지난 Todo -->
+        <section class="todo-panel todo-panel-right">
+
+            <div class="panel-header">
+                <h2 class="panel-title">not end to do</h2>
+            </div>
+
+            <div class="panel-line"></div>
+
+            <ul class="todo-list expired-list">
+                <!-- 기한 필드 추가 후 같은 _todo_item.html 사용 -->
+            </ul>
+
+        </section>
+
+    </main>
+</body>
+</html>

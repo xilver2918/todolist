@@ -1,0 +1,106 @@
+
+/* 세 블록의 공통 설정 */
+.signup-field {
+    position: absolute;
+
+    width: 447px;
+    height: 62px;
+    left: 335px;
+    border-radius: 8px;
+
+    background-color: #F3F9FF;
+}
+
+
+/* 아이디 블록 */
+.username-field {
+    top: 259px;
+}
+
+
+/* 패스워드 블록 */
+.password-field {
+    top: 367px;
+}
+
+
+/* 패스워드 확인 블록 */
+.password-confirm-field {
+    top: 490px;
+}
+
+.field-label {
+    position: absolute;
+    margin: 0;
+
+    font-family: Chocolate Classical Sans;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 20px;
+    line-height: 100%;
+    left : 346px;
+
+
+    color: #151B22;
+
+}
+
+/* 아이디 문구 */
+.username-label {
+    top: 223px;
+
+}
+
+
+/* 패스워드 문구 */
+.password-label {
+    top: 331px;
+}
+
+
+/* 패스워드 확인 문구 */
+.password-confirm-label {
+    top: 454px;
+}
+
+
+
+/* 최하단 회원가입 버튼 */
+.signup-button {
+    position: absolute;
+
+    width: 234px;
+    height: 62px;
+    top: 598px;
+    left: 442px;
+    border-radius: 8px;
+
+    background: #225A98;
+
+
+    font-family: "Chocolate Classical Sans", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+
+    color: #F8FAFC;
+
+    cursor: pointer;
+}
+
+.signup-field input {
+    /* 입력칸 디자인 */
+    width: 100%;
+    height: 100%;
+
+    padding: 0 16px;
+
+    border: none;
+    border-radius: 8px;
+    outline: none;
+
+    background-color: transparent;
+
+    font-family: "Chocolate Classical Sans", sans-serif;
+    font-size: 20px;
+    color: #222222;
+}

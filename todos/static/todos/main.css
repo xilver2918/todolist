@@ -1,0 +1,395 @@
+
+.todo-page {
+    position: relative;
+
+    width: 1064px;
+    height: 738px;
+
+    margin: 0 auto;
+
+    background: #F8FAFC;
+
+}
+
+
+/* 좌측 상단 제목 */
+.main-title {
+    position: absolute;
+
+    width: 136px;
+    height: 33px;
+    top: 6px;
+    left: 12px;
+    border-width: 1px;
+    
+
+    margin: 0;
+
+    font-family: "Chocolate Classical Sans", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    -webkit-text-stroke: 1px #0F171F;
+    
+
+    color: #0F171F;
+    
+
+}
+
+
+/* 우측 상단 사용자 영역 */
+.user-area {
+    position: absolute;
+
+    top: 11px;
+    left: 911px;
+
+
+    display: flex;
+    align-items: center;
+}
+
+.user-icon {
+    width: 20px;
+    height: 20px;
+
+    margin-right: 4px;
+}
+
+.username {
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #16191D;
+}
+
+.user-divider {
+    margin: 0 1px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #16191D;
+}
+
+.logout-form {
+    margin: 0;
+}
+
+.logout-button {
+    padding: 0;
+    border: none;
+
+    background-color: transparent;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #93979C;
+
+    cursor: pointer;
+}
+
+
+
+
+/* 세 패널 공통 설정 */
+.todo-panel {
+    position: absolute;
+
+    width: 226px;
+    top: 89px;
+    border-radius: 36px;
+
+    background: #D9EAFD;
+
+}
+
+
+/* 왼쪽 패널 */
+.todo-panel-left {
+    height: 238px;
+    left: 94px;
+}
+
+
+/* 가운데 패널 */
+.todo-panel-center {
+    height: 333px;
+    left: 408px;
+}
+
+
+/* 오른쪽 패널 */
+.todo-panel-right {
+    height: 333px;
+    left: 722px;
+}
+
+
+/* 패널 상단 영역 */
+.panel-header {
+    position: relative;
+
+    width: 100%;
+    height: 000px;
+}
+
+
+/* 패널 제목 */
+.panel-title {
+    position: absolute;
+
+    width: 136px;
+    height: 33px;
+    top: 104px;
+    left: 114px;
+    border-width: 1px;
+
+
+    margin: 0;
+
+    font-family: "Chocolate Classical Sans", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 100%;
+
+    color: #151B22;
+}
+
+
+/* Todo 추가 버튼 */
+.add-button {
+    position: absolute;
+
+    width: 000px;
+    height: 000px;
+
+    top: 000px;
+    left: 000px;
+
+    border: none;
+    border-radius: 50%;
+
+    font-size: 000px;
+    line-height: 100%;
+    text-align: center;
+
+    color: #000000;
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+/* 패널 제목 아래 구분선 */
+.panel-line {
+    position: absolute;
+
+    width: 000px;
+    height: 1px;
+
+    top: 000px;
+    left: 000px;
+
+    background-color: #000000;
+}
+
+
+/* Todo 목록 공통 */
+.todo-list {
+    position: absolute;
+
+    width: 000px;
+
+    top: 000px;
+    left: 000px;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+
+/* Todo 한 항목 */
+.todo-item {
+    position: relative;
+
+    width: 100%;
+    min-height: 000px;
+
+    margin-bottom: 000px;
+}
+
+
+/* Todo 제목 */
+.todo-title {
+    font-family: "Chocolate Classical Sans", sans-serif;
+    font-weight: 400;
+    font-size: 000px;
+
+    color: #000000;
+}
+
+
+/* 완료된 Todo */
+.completed-item .todo-title {
+    color: #000000;
+}
+
+
+/* 완료 변경 form */
+.todo-toggle-form {
+    display: inline;
+}
+
+
+/* 완료 변경 버튼 */
+.todo-toggle-button {
+    padding: 0;
+    border: none;
+
+    background-color: transparent;
+
+    font-size: 000px;
+    color: #000000;
+
+    cursor: pointer;
+}
+
+
+/* 삭제 form */
+.todo-delete-form {
+    display: inline;
+}
+
+
+/* 삭제 버튼 */
+.todo-delete-button {
+    padding: 0;
+    border: none;
+
+    background-color: transparent;
+
+    font-size: 000px;
+    color: #000000;
+
+    cursor: pointer;
+}
+
+/* + 원 버튼 */
+.add-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background-color: #5279B1;
+    color: #FFFFFF;
+
+    font-size: 24px;
+    line-height: 1;
+
+    text-decoration: none;
+}
+
+
+/* Todo 목록 */
+.todo-list {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+
+/* Todo 한 세트 */
+.todo-item {
+    position: relative;
+    width: 100%;
+
+    margin-bottom: 16px;
+}
+
+
+/* 글씨와 원 버튼을 한 줄로 묶음 */
+.todo-item-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+
+/* Todo 글씨 영역 */
+.todo-text {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Todo 제목 */
+.todo-title {
+    font-weight: 700;
+    color: #0F171F;
+}
+
+
+/* 완료 상태 원 버튼 */
+.status-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 24px;
+    height: 24px;
+    padding: 0;
+
+    border: 2px solid #5279B1;
+    border-radius: 50%;
+
+    background-color: transparent;
+    color: #FFFFFF;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+/* 완료 패널의 체크 원 */
+.status-button.is-completed {
+    border-color: #5279B1;
+    background-color: #5279B1;
+}
+
+
+/* form 기본 여백 제거 */
+.todo-toggle-form,
+.todo-delete-form {
+    margin: 0;
+}
+
+
+/* 삭제 버튼은 기존 기능 유지 */
+.todo-delete-button {
+    padding: 0;
+    border: none;
+
+    background-color: transparent;
+
+    font-size: 12px;
+    color: #93979C;
+
+    cursor: pointer;
+}

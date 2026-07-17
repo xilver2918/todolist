@@ -1,0 +1,45 @@
+<li class="todo-item">
+
+    <div class="todo-item-row">
+
+        <div class="todo-text">
+            <strong class="todo-title">
+                {{ todo.title }}
+            </strong>
+
+            <!-- 기한은 models 수정 후 여기에 추가 -->
+        </div>
+
+        <form
+            class="todo-toggle-form"
+            method="post"
+            action="{% url 'todo_toggle' todo.id %}"
+        >
+            {% csrf_token %}
+
+            <button
+                class="status-button {% if section_type == 'completed' %}is-completed{% endif %}"
+                type="submit"
+                aria-label="완료 상태 변경"
+            >
+                {% if section_type == "completed" %}
+                    ✓
+                {% endif %}
+            </button>
+        </form>
+
+    </div>
+
+    <!-- 기존 삭제 기능 유지 -->
+    <form
+        class="todo-delete-form"
+        method="post"
+        action="{% url 'todo_delete' todo.id %}"
+    >
+        {% csrf_token %}
+        <button class="todo-delete-button" type="submit">
+            삭제
+        </button>
+    </form>
+
+</li>

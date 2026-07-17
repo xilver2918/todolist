@@ -1,0 +1,66 @@
+
+
+/* 로그인 칸 */
+.login-box {
+    position: absolute;
+
+    width: 313px;
+    height: 62px;
+    top: 325px;
+    left: 376px;
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #225A98;
+}
+
+
+/* 로그인 칸 안의 글씨 */
+.login-box-text {
+    
+    font-family: Chocolate Classical Sans;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 20px;
+    line-height: 100%;
+
+    color: #F8FAFC;
+
+}
+
+
+/* 회원가입 칸 */
+.signup-box {
+    position: absolute;
+
+    width: 313px;
+    height: 62px;
+    top: 422px;
+    left: 376px;
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: #F8FAFC;
+}
+
+
+
+/* 회원가입 칸 안의 글씨 */
+.signup-box-text {
+    font-family: Chocolate Classical Sans;
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 20px;
+    line-height: 100%;
+    
+
+    color: #225A98;
+
+
+}

@@ -1,0 +1,45 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>회원가입</title>
+
+    <link rel="stylesheet" href="{% static 'todos/common.css' %}">
+    <link rel="stylesheet" href="{% static 'accounts/signup.css' %}">
+</head>
+
+<body>
+    <main class="main-page">
+
+        <h1 class="main-title">To Do List</h1>
+
+        <form class="signup-form" method="post">
+        {% csrf_token %}
+
+        <p class="field-label username-label">아이디</p>
+        <div class="signup-field username-field">
+            {{ form.username }}
+        </div>
+
+        <p class="field-label password-label">패스워드</p>
+        <div class="signup-field password-field">
+            {{ form.password1 }}
+        </div>
+
+        <p class="field-label password-confirm-label">패스워드 확인</p>
+        <div class="signup-field password-confirm-field">
+            {{ form.password2 }}
+        </div>
+
+        <button class="signup-button" type="submit">
+            회원가입
+        </button>
+    </form>
+
+    </main>
+</body>
+</html>
