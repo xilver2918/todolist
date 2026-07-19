@@ -1,45 +1,9 @@
-<li class="todo-item">
-
-    <div class="todo-item-row">
-
-        <div class="todo-text">
-            <strong class="todo-title">
-                {{ todo.title }}
-            </strong>
-
-            <!-- 기한은 models 수정 후 여기에 추가 -->
-        </div>
-
-        <form
-            class="todo-toggle-form"
-            method="post"
-            action="{% url 'todo_toggle' todo.id %}"
-        >
-            {% csrf_token %}
-
-            <button
-                class="status-button {% if section_type == 'completed' %}is-completed{% endif %}"
-                type="submit"
-                aria-label="완료 상태 변경"
-            >
-                {% if section_type == "completed" %}
-                    ✓
-                {% endif %}
-            </button>
-        </form>
-
-    </div>
-
-    <!-- 기존 삭제 기능 유지 -->
-    <form
-        class="todo-delete-form"
-        method="post"
-        action="{% url 'todo_delete' todo.id %}"
-    >
-        {% csrf_token %}
-        <button class="todo-delete-button" type="submit">
-            삭제
-        </button>
-    </form>
-
+<li class="todo-item {% if section_type == 'completed' %}is-completed{% elif section_type == 'expired' %}is-expired{% endif %}">
+    <a class="todo-summary-link" href="{% url 'todo_list' %}?selected={{ todo.id }}">
+        <strong class="todo-title">{{ todo.title }}</strong>
+        {% if section_type == 'active' and todo.due_date %}
+            <span class="todo-date">{{ todo.due_date|date:"Y.m.d" }}&#xAE4C;&#xC9C0;</span>
+        {% endif %}
+    </a>
+    <a class="status-link {% if section_type == 'completed' %}is-completed{% endif %}" href="{% url 'todo_list' %}?status={{ todo.id }}" aria-label="&#xC0C1;&#xD0DC; &#xBCC0;&#xACBD;"></a>
 </li>

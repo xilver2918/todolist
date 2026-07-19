@@ -2,19 +2,10 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Todo 추가</title>
+    <meta http-equiv="refresh" content="0; url={% url 'todo_list' %}?action=create">
+    <title>Todo &#xCD94;&#xAC00;</title>
 </head>
 <body>
-    <h1>Todo 추가</h1>
-
-    <form method="post">
-        {% csrf_token %}
-
-        {{ form.as_p }}
-
-        <button type="submit">추가</button>
-    </form>
-
-    <a href="{% url 'todo_list' %}">목록으로 돌아가기</a>
+    <a href="{% url 'todo_list' %}?action=create">Todo &#xCD94;&#xAC00;</a>
 </body>
 </html>

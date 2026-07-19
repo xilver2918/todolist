@@ -5,107 +5,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>{{ page_title }}</title>
-
     <link rel="stylesheet" href="{% static 'todos/common.css' %}">
     <link rel="stylesheet" href="{% static 'todos/main.css' %}">
 </head>
-
 <body>
     <main class="todo-page">
-
         <h1 class="main-title">{{ page_title }}</h1>
 
         <div class="user-area">
-            <img
-                class="user-icon"
-                src="{% static 'todos/images/user-icon.svg' %}"
-                alt=""
-            >
-
-            <span class="username">
-                {{ request.user.username }}님
-            </span>
-
+            <img class="user-icon" src="{% static 'todos/images/user-icon.svg' %}" alt="">
+            <span class="username">{{ request.user.username }}&#xB2D8;</span>
             <span class="user-divider">/</span>
-
-            <form
-                class="logout-form"
-                method="post"
-                action="{% url 'logout' %}"
-            >
+            <form class="logout-form" method="post" action="{% url 'logout' %}">
                 {% csrf_token %}
-                <button class="logout-button" type="submit">
-                    로그아웃
-                </button>
+                <button class="logout-button" type="submit">&#xB85C;&#xADF8;&#xC544;&#xC6C3;</button>
             </form>
         </div>
 
-
-        <!-- 미완료 Todo -->
         <section class="todo-panel todo-panel-left">
-
             <div class="panel-header">
                 <h2 class="panel-title">to do</h2>
-
-                <a
-                    class="add-button"
-                    href="{% url 'todo_create' %}"
-                    aria-label="Todo 추가"
-                >
-                    +
-                </a>
+                <a class="add-button" href="{% url 'todo_list' %}?action=create" aria-label="Todo &#xCD94;&#xAC00;"></a>
             </div>
-
             <div class="panel-line"></div>
-
-            <ul class="todo-list">
-                {% for todo in todos %}
-                    {% if not todo.completed %}
-                        {% include "todos/_todo_item.html" with todo=todo section_type="active" %}
-                    {% endif %}
+            <ul class="todo-list active-list">
+                {% for todo in active_todos %}
+                    {% include "todos/_todo_item.html" with todo=todo section_type="active" %}
                 {% endfor %}
             </ul>
-
         </section>
 
-
-        <!-- 완료된 Todo -->
         <section class="todo-panel todo-panel-center">
-
             <div class="panel-header">
                 <h2 class="panel-title">end to do</h2>
             </div>
-
             <div class="panel-line"></div>
-
             <ul class="todo-list completed-list">
-                {% for todo in todos %}
-                    {% if todo.completed %}
-                        {% include "todos/_todo_item.html" with todo=todo section_type="completed" %}
-                    {% endif %}
+                {% for todo in completed_todos %}
+                    {% include "todos/_todo_item.html" with todo=todo section_type="completed" %}
                 {% endfor %}
             </ul>
-
         </section>
 
-
-        <!-- 기한이 지난 Todo -->
         <section class="todo-panel todo-panel-right">
-
             <div class="panel-header">
                 <h2 class="panel-title">not end to do</h2>
             </div>
-
             <div class="panel-line"></div>
-
             <ul class="todo-list expired-list">
-                <!-- 기한 필드 추가 후 같은 _todo_item.html 사용 -->
+                {% for todo in expired_todos %}
+                    {% include "todos/_todo_item.html" with todo=todo section_type="expired" %}
+                {% endfor %}
             </ul>
-
         </section>
 
+        {% if selected_todo %}
+            <article class="todo-detail-card detail-{{ selected_section }}">
+                <div class="detail-badge">
+                    {% if selected_section == "completed" %}End{% elif selected_section == "expired" %}Not End{% else %}TO Do{% endif %}
+                </div>
+                <p class="detail-label detail-label-title">to do</p>
+                <h3 class="detail-title">{{ selected_todo.title }}</h3>
+                <div class="detail-line detail-line-title"></div>
+                <p class="detail-label detail-label-date">&#xAE30;&#xD55C;</p>
+                <p class="detail-date">
+                    {% if selected_todo.due_date %}{{ selected_todo.due_date|date:"Y.m.d" }} &#xAE4C;&#xC9C0;{% endif %}
+                </p>
+                <div class="detail-line detail-line-date"></div>
+                <a class="detail-action detail-edit" href="{% url 'todo_list' %}?edit={{ selected_todo.id }}">&#xC218;&#xC815;</a>
+                <a class="detail-action detail-delete" href="{% url 'todo_list' %}?selected={{ selected_todo.id }}&amp;delete={{ selected_todo.id }}">&#xC0AD;&#xC81C;</a>
+            </article>
+        {% endif %}
+
+        {% if form_mode %}
+            <section class="todo-dialog editor-dialog">
+                <form method="post" action="{% if form_mode == 'edit' %}{% url 'todo_edit' form_todo.id %}{% else %}{% url 'todo_create' %}{% endif %}">
+                    {% csrf_token %}
+                    <a class="dialog-close" href="{% url 'todo_list' %}{% if form_todo %}?selected={{ form_todo.id }}{% endif %}" aria-label="&#xB2EB;&#xAE30;">&times;</a>
+
+                    <label class="dialog-label dialog-title-label" for="{{ form.title.id_for_label }}">TO DO &#xC785;&#xB825;</label>
+                    {{ form.title }}
+                    {% if form.title.errors %}<div class="dialog-error dialog-title-error">{{ form.title.errors.0 }}</div>{% endif %}
+
+                    <label class="dialog-label dialog-date-label" for="{{ form.due_date.id_for_label }}">TO DO &#xAE30;&#xD55C; &#xC124;&#xC815;</label>
+                    {{ form.due_date }}
+                    {% if form.due_date.errors %}<div class="dialog-error dialog-date-error">{{ form.due_date.errors.0 }}</div>{% endif %}
+
+                    <a class="dialog-action dialog-cancel" href="{% url 'todo_list' %}{% if form_todo %}?selected={{ form_todo.id }}{% endif %}">&#xCDE8;&#xC18C;</a>
+                    <button class="dialog-action dialog-submit" type="submit">&#xC800;&#xC7A5; &#xD6C4; &#xB2EB;&#xAE30;</button>
+                </form>
+            </section>
+        {% endif %}
+
+        {% if delete_todo %}
+            <section class="confirm-dialog delete-confirm">
+                <p class="confirm-title">&#xC815;&#xB9D0;&#xB85C; &#xC0AD;&#xC81C;&#xD558;&#xC2DC;&#xACA0;&#xC2B5;&#xB2C8;&#xAE4C;?</p>
+                <p class="confirm-description">&#xC0AD;&#xC81C;&#xD6C4;&#xC5D0;&#xB294; &#xBCF5;&#xAD6C;&#xD558;&#xAE30; &#xC5B4;&#xB835;&#xC2B5;&#xB2C8;&#xB2E4;.</p>
+                <a class="confirm-action confirm-cancel" href="{% url 'todo_list' %}?selected={{ delete_todo.id }}">&#xCDE8;&#xC18C;</a>
+                <form class="confirm-form" method="post" action="{% url 'todo_delete' delete_todo.id %}">
+                    {% csrf_token %}
+                    <button class="confirm-action confirm-delete" type="submit">&#xC0AD;&#xC81C;&#xD558;&#xAE30;</button>
+                </form>
+            </section>
+        {% endif %}
+
+        {% if status_todo %}
+            <section class="confirm-dialog status-confirm">
+                <p class="confirm-title">{{ status_todo.title }} &#xB97C;(&#xC744;) {{ status_target }} &#xC0C1;&#xD0DC;&#xB85C; &#xBC14;&#xAFB8;&#xC2DC;&#xACA0;&#xC2B5;&#xB2C8;&#xAE4C;?</p>
+                <p class="confirm-description">&#xBC14;&#xAFC0; &#xACBD;&#xC6B0; {{ status_todo.title }} &#xB294;(&#xC740;) {{ status_target }}&#xBAA9;&#xB85D;&#xC5D0; &#xD45C;&#xC2DC;&#xB429;&#xB2C8;&#xB2E4;.</p>
+                <a class="confirm-action confirm-cancel" href="{% url 'todo_list' %}">&#xC544;&#xB2C8;&#xC624;</a>
+                <form class="confirm-form" method="post" action="{% url 'todo_toggle' status_todo.id %}">
+                    {% csrf_token %}
+                    <button class="confirm-action confirm-yes" type="submit">&#xC608;</button>
+                </form>
+            </section>
+        {% endif %}
     </main>
 </body>
 </html>
